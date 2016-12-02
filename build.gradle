@@ -1,0 +1,64 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'com.google.protobuf'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.7.6'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile files('lib/jfoenix.jar')
+    compile 'commons-io:commons-io:2.4'
+    compile 'org.glassfish.tyrus:tyrus-client:1.12'
+    compile 'org.glassfish.tyrus:tyrus-container-grizzly-client:1.12'
+    compile 'org.json:json:20160212'
+    compile 'io.grpc:grpc-all:0.13.2'
+    compile 'com.google.protobuf:protobuf-java:3.0.0-beta-2' // must match protobuf.protoc.artifact version
+    compile 'io.netty:netty-tcnative-boringssl-static:1.1.33.Fork14:windows-x86_64' // fork 14 is the latest working version, uber version did not seem to be working properly it had no dlls
+    compile 'io.netty:netty-tcnative-boringssl-static:1.1.33.Fork14:linux-x86_64' // duplicated for linux, uber version not working
+}
+
+protobuf {
+    protoc {
+        // The version of protoc must match protobuf-java. If you don't depend on
+        // protobuf-java directly, you will be transitively depending on the
+        // protobuf-java version that grpc depends on.
+        artifact = "com.google.protobuf:protoc:3.0.0-beta-2"
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:0.13.2'
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {
+                outputSubDir = 'java' // generates grpc files to src/main/java/walletrpc
+            }
+        }
+    }
+    generateProtoTasks.generatedFilesBaseDir = 'src'
+}
+
+sourceSets {
+    main {
+        proto {
+            srcDir 'src/main/proto'
+        }
+    }
+}
+
+wrapper {
+    gradleVersion = '2.12'
+}
+
+

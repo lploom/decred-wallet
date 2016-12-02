@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.collections.FXCollections ?>
+
+<?import java.lang.String?>
+<GridPane alignment="center" hgap="10" prefHeight="401.0" prefWidth="507.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.gui.Controller">
+    <stylesheets>
+        <URL value="@main.css" />
+    </stylesheets>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <JFXButton fx:id="mainButton" onMouseClicked="#mainButtonClicked" buttonType="RAISED" styleClass="button-raised" text="CLICK ME" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <JFXCheckBox text="Stake mine" unCheckedColor="#111010" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <JFXComboBox promptText="Java Version" GridPane.columnIndex="3" GridPane.rowIndex="1">
+          <items>
+              <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="1.8" />
+                  <String fx:value="1.7" />
+                  <String fx:value="1.6" />
+                  <String fx:value="1.5" />
+              </FXCollections>
+          </items>
+      </JFXComboBox>
+   </children>
+</GridPane>
